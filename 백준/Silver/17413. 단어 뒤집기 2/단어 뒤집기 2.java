@@ -1,37 +1,33 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         boolean isReverse = true;
-
-        String s = br.readLine();
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '<') {
+        char[] array = br.readLine().toCharArray();
+        char before = ' ';
+        for (char c : array) {
+            if (c == '<') {
                 isReverse = false;
                 System.out.print(sb.reverse());
                 sb = new StringBuilder();
-            } else if (i > 0 && s.charAt(i - 1) == '>') {
+            } else if (before == '>') {
                 isReverse = true;
-            } else if (s.charAt(i) == ' ') {
-                System.out.print(sb.reverse() + " ");
+            } else if (c == ' ') {
+                System.out.print(sb.reverse().append(" "));
                 sb = new StringBuilder();
                 continue;
             }
+            before = c;
 
-            if (isReverse) {
-                sb.append(s.charAt(i));
-            } else {
-                System.out.print(s.charAt(i));
-            }
+            if (isReverse) sb.append(c);
+            else System.out.print(c);
         }
+
         System.out.print(sb.reverse());
     }
 }
